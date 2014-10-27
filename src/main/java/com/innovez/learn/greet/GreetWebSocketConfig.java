@@ -6,6 +6,11 @@ import org.springframework.web.socket.config.annotation.AbstractWebSocketMessage
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
+/**
+ * Greeting feature configuration.
+ * 
+ * @author zakyalvan
+ */
 @Configuration
 @EnableWebSocketMessageBroker
 public class GreetWebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
@@ -16,7 +21,12 @@ public class GreetWebSocketConfig extends AbstractWebSocketMessageBrokerConfigur
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
-		registry.enableSimpleBroker("/topic");
+		registry.enableStompBrokerRelay("/topic", "/queue")
+			.setRelayHost("localhost")
+			.setRelayPort(61613)
+			.setClientLogin("guest")
+			.setClientPasscode("guest")
+			.setAutoStartup(true);
 		registry.setApplicationDestinationPrefixes("/app");
 	}
 }

@@ -14,14 +14,14 @@ import org.springframework.web.socket.server.support.HttpSessionHandshakeInterce
 public class BasicWebSocketConfig implements WebSocketConfigurer {
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(helloHandler(), "/basic-web-socket")
+		registry.addHandler(helloHandler(), "/native-web-socket")
 			.addInterceptors(new HttpSessionHandshakeInterceptor())
 			.setHandshakeHandler(handshakeHandler());
 	}
 	
 	@Bean
-	public HelloWebSocketHandler helloHandler() {
-		return new HelloWebSocketHandler();
+	public SimpleWebSocketHandler helloHandler() {
+		return new SimpleWebSocketHandler();
 	}
 	
 	@Bean

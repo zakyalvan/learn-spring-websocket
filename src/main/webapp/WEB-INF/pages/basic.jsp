@@ -39,9 +39,8 @@
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="/basic">Basic</a></li>
+						<li class="active"><a href="/basic">Native</a></li>
 						<li><a href="/greet">Greet</a></li>
-						<li><a href="/chat">Chat</a></li>
 					</ul>
 				</div>
 			</div>
@@ -91,7 +90,7 @@
 				});
 				if('WebSocket' in window) {
 					console.log('WebSocket supported by your briwser.');
-					socket = new WebSocket('ws://localhost:8080//basic-web-socket');
+					socket = new WebSocket('ws://localhost:8080//native-web-socket');
 					
 					console.log("Connect attempted");
 					socket.onopen = function() {

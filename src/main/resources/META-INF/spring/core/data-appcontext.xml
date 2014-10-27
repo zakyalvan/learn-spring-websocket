@@ -19,9 +19,4 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
-	
-	<!-- 
-	If not registered here, an exception throw for no transaction is in progress.
-	 -->
-	<bean name="userManagementService" class="com.innovez.learn.chat.service.JpaUserManagementService" />
 </beans>

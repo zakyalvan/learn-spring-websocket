@@ -4,15 +4,16 @@ import javax.servlet.Filter;
 
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
 
-import com.innovez.learn.basic.BasicWebSocketConfig;
-import com.innovez.learn.chat.ChatWebSocketConfig;
-import com.innovez.learn.greet.GreetWebSocketConfig;
-
-public class WebappInitializer extends AbstractDispatcherServletInitializer {
+/**
+ * Application initializer, this class equivalent to web.xml file.
+ * 
+ * @author zakyalvan
+ */
+public class ApplicationInitializer extends AbstractDispatcherServletInitializer {
 	@Override
 	protected WebApplicationContext createServletApplicationContext() {
 		XmlWebApplicationContext applicationContext = new XmlWebApplicationContext();
@@ -34,6 +35,8 @@ public class WebappInitializer extends AbstractDispatcherServletInitializer {
 
 	@Override
 	protected Filter[] getServletFilters() {
-		return new Filter[] {new OpenEntityManagerInViewFilter()};
+		HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
+		OpenEntityManagerInViewFilter openEntityManagerInViewFilter = new OpenEntityManagerInViewFilter();
+		return new Filter[] {hiddenHttpMethodFilter, openEntityManagerInViewFilter};
 	}
 }

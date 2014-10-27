@@ -40,9 +40,8 @@
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="/basic">Basic</a></li>
+						<li><a href="/basic">Native</a></li>
 						<li class="active"><a href="/greet">Greet</a></li>
-						<li><a href="/chat">Chat</a></li>
 					</ul>
 				</div>
 			</div>
@@ -107,7 +106,7 @@
 	        function setConnected(connected) {
 	        	$("#connect-button").attr("disabled", connected);
 	        	$("#disconnect-button").attr("disabled", !connected);
-	            document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
+	            //document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
 	            $("#response").empty();
 	        }
 	
@@ -117,7 +116,8 @@
 	            stompClient.connect({}, function(frame) {
 	                setConnected(true);
 	                console.log('Connected: ' + frame);
-	                stompClient.subscribe('/topic/greetings', function(greeting){
+	                stompClient.subscribe('/topic/hello', function(greeting){
+	                	console.log("Greeting from server : " + greeting);
 	                    showGreeting(JSON.parse(greeting.body).content);
 	                });
 	            });
@@ -131,6 +131,7 @@
 	
 	        function sendName() {
 	            var name = $("#name").val();
+	            console.log("Name to be sent : " + name);
 	            stompClient.send("/app/hello", {}, JSON.stringify({ 'name': name }));
 	        }
 	        function showGreeting(message) {
