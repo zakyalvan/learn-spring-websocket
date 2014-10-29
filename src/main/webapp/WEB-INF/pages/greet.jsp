@@ -57,7 +57,7 @@
 					
 				</div>
 				<div id="conversationDiv" class="row">
-					<div class="col-lg-12">
+					<div class="col-lg-6">
 						<div class="input-group">
 							<span class="input-group-btn">
 								<button id="connect-button" class="btn btn-info">Connect</button>
@@ -69,8 +69,8 @@
 							</span>
 						</div><!-- /input-group -->
 					</div>
-					<div class="col-lg-12">
-						<p id="response"></p>
+					<div class="col-lg-6 panel panel-default">
+						<div id="response" class="panel-body"></div>
 					</div>
 				</div>
 			</div>
@@ -98,7 +98,7 @@
 					disconnect();
 				});
 				$("#send-button").on("click", function(event) {
-					sendName();
+					send();
 				});
 			});
 		
@@ -129,7 +129,7 @@
 	            console.log("Disconnected");
 	        }
 	
-	        function sendName() {
+	        function send() {
 	            var name = $("#name").val();
 	            console.log("Name to be sent : " + name);
 	            stompClient.send("/app/hello", {}, JSON.stringify({ 'name': name }));
